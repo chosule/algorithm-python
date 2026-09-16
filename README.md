@@ -60,6 +60,40 @@ python3 scripts/practice.py --all                 # 지금까지 푼 문제 전�
 
 막히면 같은 경로의 `problems/`에서 정답을 확인하세요.
 
+### 3. 같은 문제를 다른 접근법으로 다시 풀기
+
+브루트포스로 먼저 풀고 나중에 최적 풀이로 다시 푸는 경우, **파일을 나누지 말고 같은 파일에 함수를 추가**합니다.
+
+- `solution` = 지금 연습 대상 (보통 최적 풀이)
+- `solution_<접근법>` = 보관해두는 과거 풀이
+
+```python
+def solution_bruteforce(temperatures):
+    """시간복잡도: O(n^2)"""
+    ...
+
+def solution(temperatures):
+    """시간복잡도: O(n)"""
+    ...
+
+if __name__ == "__main__":
+    run_tests({"브루트포스": solution_bruteforce, "스택": solution}, test_cases)
+```
+
+`run_tests`에 `{이름: 함수}` 딕셔너리를 넘기면 **같은 테스트 케이스로 전부 실행하고 마지막에 속도를 비교**해줍니다.
+
+```
+=== 속도 비교 ===
+  스택        0.1840ms    1.0x
+  브루트포스    84.9040ms  461.3x
+```
+
+함수 하나만 넘기던 기존 방식(`run_tests(solution, test_cases)`)도 그대로 동작합니다.
+
+이렇게 두면 `scripts/practice.py`가 **`solution`만 비우고 `solution_bruteforce`는 남겨둡니다.** 과거 풀이를 보면서 새 접근법을 연습할 수 있습니다.
+
+> 복잡도 차이는 입력이 작으면 안 드러납니다. 비교가 목적이면 큰 테스트 케이스를 하나 넣으세요 — `problems/stack/daily_temperatures.py`의 `성능 비교 (n=3000)` 케이스 참고.
+
 ## ✨ 기능
 
 1. 테스트 케이스 자동 검증
@@ -86,5 +120,5 @@ def solution(nums, target):
 
 - 각 문제에 출처와 링크를 주석으로 남기세요
 - 시간복잡도와 공간복잡도를 분석해보세요
-- 여러 솔루션을 작성하고 비교해보세요
+- 여러 솔루션을 작성하고 비교해보세요 (위 `3.` 참고)
 - `input`이 여러 인자면 `TestCase(input=(a, b), ...)`처럼 tuple로 전달하세요

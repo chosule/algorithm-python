@@ -29,6 +29,31 @@ for _parent in (_here, *_here.parents):
 from utils.test_helper import TestCase, run_tests  # noqa: E402
 
 
+def solution_bruteforce(temperatures):
+    """
+    시간복잡도: O(n^2)
+    공간복잡도: O(n)
+
+    접근 방법:
+    1. 각 날을 기준으로 그 뒤를 끝까지 훑는다.
+    2. 처음으로 더 따뜻한 날을 만나면 날짜 차이를 기록한다(flag로 한 번만).
+    3. 끝까지 못 만나면 0을 넣는다.
+    """
+    result = []
+
+    for index, v in enumerate(temperatures):
+        flag = False
+        for i in range(index + 1, len(temperatures)):
+            if temperatures[i] > v and flag is False:
+                flag = True
+                result.append(i - index)
+
+        if flag is False:
+            result.append(0)
+
+    return result
+
+
 def solution(temperatures):
     """
     시간복잡도: O(n)
@@ -49,6 +74,8 @@ def solution(temperatures):
     return answer
 
 
+_PERF_N = 3000
+
 test_cases = [
     TestCase(name="기본 케이스", input=([73, 74, 75, 71, 69, 72, 76, 73],),
              expected=[1, 1, 4, 2, 1, 1, 0, 0]),
@@ -57,7 +84,12 @@ test_cases = [
     TestCase(name="계속 하강", input=([90, 80, 70],), expected=[0, 0, 0]),
     TestCase(name="같은 기온", input=([50, 50, 50],), expected=[0, 0, 0]),
     TestCase(name="원소 하나", input=([30],), expected=[0]),
+    # 성능 비교용. 계속 오르는 입력이라 정답은 계산 없이 [1,1,...,1,0]으로 확정된다.
+    # 기온 범위(30~100) 제약은 벗어나지만 알고리즘 동작에는 영향이 없다.
+    TestCase(name=f"성능 비교 (n={_PERF_N})",
+             input=(list(range(_PERF_N)),),
+             expected=[1] * (_PERF_N - 1) + [0]),
 ]
 
 if __name__ == "__main__":
-    run_tests(solution, test_cases)
+    run_tests({"브루트포스": solution_bruteforce, "스택": solution}, test_cases)

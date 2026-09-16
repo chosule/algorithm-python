@@ -12,3 +12,6 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# OMC tooling state
+.omc/
