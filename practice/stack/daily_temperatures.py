@@ -55,8 +55,18 @@ def solution_bruteforce(temperatures):
 
 
 def solution(temperatures):
+    t = temperatures
+    # 대기열
+    stack = []
+    result = [0] * len(t)
+    for index,v in enumerate(t):
+        # 현재 온도가 이전보다 높으면 그냥 pop 만 , 현재온도가 이전보다 낮으면 index 대기열에 추가
+        while stack and v > t[stack[-1]]:
+            last = stack.pop()
+            result[last] = index - last
+        stack.append(index)
 
-
+    return result
 
 _PERF_N = 3000
 
