@@ -30,25 +30,53 @@ algorithm-python/
 └── template.py          # 새 문제 풀 때 복사해서 쓰는 템플릿
 ```
 
-## 📋 Progress Checklist
+## 📋 진행 체크리스트
 
-Check off each problem once solved, and check the nested "Review" item after redoing it via `scripts/practice.py`. Ordered by the sequence problems were solved, for coding test prep.
+푼 문제는 체크하고, `scripts/practice.py`로 복습까지 마치면 하위 복습 항목도 체크하세요. 코딩테스트 대비용으로 문제 푼 순서대로 정렬했습니다.
 
 ### Array
 
 - [x] [두 수의 합](problems/array/two_sum.py)
-  - [x] Review
+  - [x] 복습
+
+### String
+
+### Hash
+
+### Two Pointer
 
 ### Stack
 
 - [x] [인접한 중복 문자 제거](problems/stack/remove_adjacent_duplicates.py)
-  - [x] Review
+  - [x] 복습
 - [x] [올바른 괄호](problems/stack/valid_parentheses.py)
-  - [x] Review
+  - [x] 복습
 - [x] [중복 문자 제거](problems/stack/remove_duplicate_letters.py)
-  - [ ] Review
+  - [ ] 복습
 - [x] [일일 온도](problems/stack/daily_temperatures.py)
-  - [x] Review
+  - [x] 복습
+
+### Queue
+
+### Sorting
+
+### Search
+
+### Greedy
+
+### Backtracking
+
+### DP
+
+### Graph
+
+### Tree
+
+### Linked List
+
+### Math
+
+### Etc
 
 ## 🎯 사용 방법
 
