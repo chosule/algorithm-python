@@ -37,8 +37,8 @@ algorithm-python/
 ### Array
 
 - [x] [두 수의 합](problems/array/two_sum.py)
-  - [x] 복습
-
+  - [x] 학습
+  - [ ] 
 ### String
 
 ### Hash
@@ -48,12 +48,14 @@ algorithm-python/
 ### Stack
 
 - [x] [인접한 중복 문자 제거](problems/stack/remove_adjacent_duplicates.py)
-  - [x] 복습
-- [x] [올바른 괄호](problems/stack/valid_parentheses.py)
-  - [x] 복습
-- [x] [중복 문자 제거](problems/stack/remove_duplicate_letters.py)
+  - [x] 학습
   - [ ] 복습
+- [x] [올바른 괄호](problems/stack/valid_parentheses.py)
+  - [x] 학습
+- [x] [중복 문자 제거](problems/stack/remove_duplicate_letters.py)
+  - [ ] 학습
 - [x] [일일 온도](problems/stack/daily_temperatures.py)
+  - [x] 학습
   - [x] 복습
 
 ### Queue
