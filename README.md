@@ -30,6 +30,81 @@ algorithm-python/
 └── template.py          # 새 문제 풀 때 복사해서 쓰는 템플릿
 ```
 
+## 📋 진행 체크리스트
+
+푼 문제와 복습 여부를 카테고리별로 체크합니다. 새 문제를 풀면 표에 행을 추가하고, `scripts/practice.py`로 복습까지 마치면 복습 칸을 체크하세요.
+
+### 배열 (array)
+
+| 문제 | 풀이 | 복습 |
+|---|---|---|
+| [two_sum](problems/array/two_sum.py) | ✅ | ✅ |
+
+### 문자열 (string)
+
+_아직 없음_
+
+### 해시 (hash)
+
+_아직 없음_
+
+### 스택 (stack)
+
+| 문제 | 풀이 | 복습 |
+|---|---|---|
+| [daily_temperatures](problems/stack/daily_temperatures.py) | ✅ | ✅ |
+| [valid_parentheses](problems/stack/valid_parentheses.py) | ✅ | ✅ |
+| [remove_adjacent_duplicates](problems/stack/remove_adjacent_duplicates.py) | ✅ | ✅ |
+| [remove_duplicate_letters](problems/stack/remove_duplicate_letters.py) | ✅ | ⬜ |
+
+### 큐 (queue)
+
+_아직 없음_
+
+### 연결 리스트 (linked_list)
+
+_아직 없음_
+
+### 트리 (tree)
+
+_아직 없음_
+
+### 그래프 (graph)
+
+_아직 없음_
+
+### 정렬 (sorting)
+
+_아직 없음_
+
+### 탐색 (search)
+
+_아직 없음_
+
+### 투 포인터 (two_pointer)
+
+_아직 없음_
+
+### 그리디 (greedy)
+
+_아직 없음_
+
+### 백트래킹 (backtracking)
+
+_아직 없음_
+
+### 동적 프로그래밍 (dp)
+
+_아직 없음_
+
+### 수학 (math)
+
+_아직 없음_
+
+### 기타 (etc)
+
+_아직 없음_
+
 ## 🎯 사용 방법
 
 ### 1. 새 문제 풀기 (정답 저장)
