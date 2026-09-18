@@ -34,18 +34,18 @@ algorithm-python/
 
 푼 문제는 체크하고, `scripts/practice.py`로 복습까지 마치면 하위 복습 항목도 체크하세요. 코딩테스트 대비용으로 문제 푼 순서대로 정렬했습니다.
 
-### Array
+### 1.Array
 
 - [x] [두 수의 합](problems/array/two_sum.py)
   - [x] 학습
   - [ ] 
-### String
+### 2.String
 
-### Hash
+### 3.Hash
 
-### Two Pointer
+### 4.Two Pointer
 
-### Stack
+### 5.Stack
 
 - [x] [인접한 중복 문자 제거](problems/stack/remove_adjacent_duplicates.py)
   - [x] 학습
@@ -58,27 +58,26 @@ algorithm-python/
   - [x] 학습
   - [x] 복습
 
-### Queue
+### 6.Queue
 
-### Sorting
+### 7.Sorting
 
-### Search
+### 8.Search
 
-### Greedy
+### 9.Greedy
 
-### Backtracking
+### 10.Backtracking
 
-### DP
+### 11.DP
 
-### Graph
+### 12.Graph
 
-### Tree
+### 13.Tree
 
-### Linked List
+### 14.Linked List
 
-### Math
+### 15.Math
 
-### Etc
 
 ## 🎯 사용 방법
 
