@@ -54,19 +54,23 @@ def solution_bruteforce(temperatures):
     return result
 
 
-def solution(temperatures):
-    t = temperatures
-    # 대기열
-    stack = []
-    result = [0] * len(t)
-    for index,v in enumerate(t):
-        # 현재 온도가 이전보다 높으면 그냥 pop 만 , 현재온도가 이전보다 낮으면 index 대기열에 추가
-        while stack and v > t[stack[-1]]:
-            last = stack.pop()
-            result[last] = index - last
-        stack.append(index)
 
-    return result
+    # 입력: [73,74,75,71,69,72,76,73]
+    # 출력: [1,1,4,2,1,1,0,0]
+    # 일별 기온 배열 temperatures가 주어질 때, answer[i]는 i번째 날 이후
+    # 더 따뜻해지기까지 기다려야 하는 날의 수다. 그런 날이 없으면 0.
+def solution(temperatures):
+    stack = []
+    t = temperatures 
+    # 온도 배열 인덱스들을 스택에 쌓는다
+    for index , value in enumerate(t):
+        if len(t) < 20:
+            stack.append(index)
+            print(stack)
+
+
+
+
 
 _PERF_N = 3000
 
