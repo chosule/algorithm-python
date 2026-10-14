@@ -47,13 +47,14 @@ class RecentCounter:
         self.queue.append(t)
         # deque에 들어온 t들을 [1, 100, 3001, 3002] 에서 pop 한거랑 popleft
         
-        while self.queue is not None:
+        while len(self.queue) >= 1:
             # queue = self.queue
             # l = queue.popleft() 
             # r = queue.pop()
 
             # 가장 왼쪽이랑 가장 끝에있는거랑 비교해서 가장끝에잇는거 빼기 3000 해서 그 사이에 있으면 카운트++
-            if self.queue.popleft() >= self.queue[-1] - 3000:
+            if self.queue[0] >= self.queue[-1] - 3000:
+                self.queue.popleft()
                 self.count += 1
 
         return self.count;
