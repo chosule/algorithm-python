@@ -19,28 +19,53 @@ PROBLEMS_DIR = ROOT / "problems"
 PRACTICE_DIR = ROOT / "practice"
 
 
-def build_practice_source(source: str) -> str:
-    """solution 함수의 시그니처만 남기고 본문(docstring 포함)을 TODO 스텁으로 교체한다."""
-    tree = ast.parse(source)
-    solution_fn = next(
-        (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "solution"),
-        None,
-    )
-    if solution_fn is None:
+STUB = "pass  # TODO: 여기에 코드를 작성하세요"
+
+
+def _blank_body(fn) -> tuple[int, int, list[str]]:
+    """함수/메서드 본문(docstring 포함) 전체를 TODO 스텁 한 줄로 바꾸는 구간을 만든다."""
+    indent = " " * (fn.col_offset + 4)
+    return (fn.body[0].lineno, fn.end_lineno, [f"{indent}{STUB}\n"])
+
+
+def _regions(tree) -> list[tuple[int, int, list[str]]]:
+    """지워야 할 구간 목록. 최상위 solution 함수 + 최상위 클래스의 docstring/메서드 전부.
+
+    클래스가 있는 설계 문제에서 solution은 풀이가 아니라 연산을 재생하는 테스트 드라이버라서 남긴다.
+    """
+    regions = []
+    found_solution = False
+    has_class = any(isinstance(node, ast.ClassDef) for node in tree.body)
+
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef) and node.name == "solution":
+            if not has_class:
+                regions.append(_blank_body(node))
+            found_solution = True
+        elif isinstance(node, ast.ClassDef):
+            # 클래스 docstring에 접근 방법이 적혀 있으므로 같이 지운다.
+            doc = node.body[0]
+            if isinstance(doc, ast.Expr) and isinstance(doc.value, ast.Constant) and isinstance(doc.value.value, str):
+                regions.append((doc.lineno, doc.end_lineno, []))
+            regions.extend(
+                _blank_body(m) for m in node.body if isinstance(m, ast.FunctionDef)
+            )
+
+    if not found_solution:
         raise ValueError("solution 함수를 찾을 수 없습니다")
+    return regions
 
+
+def build_practice_source(source: str) -> str:
+    """풀이 코드(solution 함수, 클래스 메서드)의 본문을 TODO 스텁으로 교체한다.
+
+    문제 설명 docstring, 테스트 케이스, main 블록, 함수/메서드 시그니처는 그대로 둔다.
+    """
     lines = source.splitlines(keepends=True)
-    body_start = solution_fn.body[0].lineno  # 1-indexed
-    body_end = solution_fn.end_lineno  # 1-indexed, inclusive
-    indent = " " * (solution_fn.col_offset + 4)
-    stub_body = f"{indent}pass  # TODO: 여기에 코드를 작성하세요\n"
-
-    return "".join(
-        lines[: solution_fn.lineno - 1]  # def solution(...): 앞부분 그대로
-        + lines[solution_fn.lineno - 1 : body_start - 1]  # 시그니처(여러 줄 가능) 유지
-        + [stub_body]
-        + lines[body_end:]  # 함수 이후(테스트 케이스, main 블록 등) 그대로
-    )
+    # 뒤에서부터 잘라내야 앞쪽 구간의 줄 번호가 밀리지 않는다.
+    for start, end, replacement in sorted(_regions(ast.parse(source)), reverse=True):
+        lines[start - 1 : end] = replacement
+    return "".join(lines)
 
 
 def make_practice_file(problem_path: Path, force: bool) -> str:
