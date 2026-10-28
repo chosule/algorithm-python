@@ -38,33 +38,46 @@ for _parent in (_here, *_here.parents):
 from utils.test_helper import TestCase, run_tests  # noqa: E402
 from collections import deque
 
+# 큐를 이용해 다음 연산을 지원하는 스택을 구현하라.
+# - push(x): 요소 x를 스택 맨 위에 삽입한다.
+# - pop(): 스택 맨 위 요소를 제거하고 리턴한다.
+# - top(): 스택 맨 위 요소를 조회한다.
+# - empty(): 스택이 비어 있는지 여부를 리턴한다.
+
 class MyStack:
+
     def __init__(self):
-        self.stack = []
-        self.queue = deque
+        self.queue = deque()
+
+    def push(self, x: int):
+        self.queue.append(x)
+        for i in range(len(self.queue)-1):
+            # print("i ->",i  )
+            self.queue.append(self.queue.popleft())
         
-    def push(self, x: int) -> None:
-        queue.append(x)
-        print("??",stack)
-
-        for i range(len(stack)-1):
-            stack.append(self.queue.popleft())
-
-
+        # print("확인->",self.queue)
 
     def pop(self) -> int:
-        return stack[0]
-
-
+        return self.queue.popleft()
+        
     def top(self) -> int:
-        pass  # TODO: 여기에 코드를 작성하세요
+        return self.queue[0]
 
     def empty(self) -> bool:
-        pass  # TODO: 여기에 코드를 작성하세요
+        return len(self.queue) == 0 
 
 
 def solution(operations, arguments):
-    pass  # TODO: 여기에 코드를 작성하세요
+    """리트코드 설계 문제 형식(연산 이름 배열 + 인자 배열)을 그대로 재생해 결과 배열을 만든다."""
+    stack = None
+    results = []
+    for name, args in zip(operations, arguments):
+        if name == "MyStack":
+            stack = MyStack()
+            results.append(None)
+        else:
+            results.append(getattr(stack, name)(*args))
+    return results
 
 
 test_cases = [

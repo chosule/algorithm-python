@@ -46,14 +46,15 @@ class RecentCounter:
         # t 가 1, 100, 3001, 3002 일단 들어오는데로 넣기
         self.queue.append(t)
         # deque에 들어온 t들을 [1, 100, 3001, 3002] 에서 pop 한거랑 popleft
-        
+    
+
+        print(self.queue)
 
         # 큐에서 계속 꺼내야 하는 동안만 반복하도록 수정하기
         while self.queue and self.queue[0] < self.queue[-1] - 3000: 
 
             # 가장 왼쪽이랑 가장 끝에있는거랑 비교해서 가장끝에잇는거 빼기 3000 해서 그 사이에 있으면 카운트++
             self.queue.popleft()
-            self.count += 1
 
         return len(self.queue);
 

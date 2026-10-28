@@ -105,30 +105,54 @@ class MyCircularDeque:
 
 
     def deleteFront(self) -> bool:
-        delete_node = self.head.right
+        if self.len == 0:
+            return False
+        
+        self.len -= 1
 
         self.head.right  = self.head.right.right
+        self.head.right.left = self.head
 
+        return True
 
 
     def deleteLast(self) -> bool:
-        pass  # TODO: 여기에 코드를 작성하세요
+        if self.len == 0:
+            return False
+        
+        self.len -= 1
+
+        self.tail.left = self.tail.left.left
+        self.tail.left.right = self.tail         
+
+        return True
 
     def getFront(self) -> int:
-        pass  # TODO: 여기에 코드를 작성하세요
+        return -1 if self.len == 0 else self.head.right.val
 
     def getRear(self) -> int:
-        pass  # TODO: 여기에 코드를 작성하세요
+        # 맨마지막 위치 가져오기
+        return self.tail.left if self.len else -1
+        
 
     def isEmpty(self) -> bool:
-        pass  # TODO: 여기에 코드를 작성하세요
+        return self.len == 0
 
     def isFull(self) -> bool:
-        pass  # TODO: 여기에 코드를 작성하세요
+        return self.len == self.k
 
 
 def solution(operations, arguments):
-    pass  # TODO: 여기에 코드를 작성하세요
+    """리트코드 설계 문제 형식(연산 이름 배열 + 인자 배열)을 그대로 재생해 결과 배열을 만든다."""
+    deque = None
+    results = []
+    for name, args in zip(operations, arguments):
+        if name == "MyCircularDeque":
+            deque = MyCircularDeque(*args)
+            results.append(None)
+        else:
+            results.append(getattr(deque, name)(*args))
+    return results
 
 
 test_cases = [
