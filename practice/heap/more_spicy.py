@@ -24,7 +24,6 @@
 - 3 + 5*2 = 13 → [13, 9, 10, 12] (모두 7 이상)
 """
 
-import heapq
 import sys
 from pathlib import Path
 
@@ -35,20 +34,31 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
+import heapq        
 
 def solution(scoville, K):
-    heapq.heapify(scoville)  # 리스트를 최소 힙으로 바꿈 → scoville[0]이 항상 가장 작은 값
+    result = []
     count = 0
 
-    while scoville[0] < K:  # 가장 작은 게 K 이상이면 전부 K 이상
-        if len(scoville) < 2:  # 섞을 짝이 없으면 실패
-            return -1
-        first = heapq.heappop(scoville)  # 가장 맵지 않은 음식
-        second = heapq.heappop(scoville)  # 두 번째로 맵지 않은 음식
-        heapq.heappush(scoville, first + second * 2)  # 섞은 음식을 다시 넣기
-        count += 1
+    # 일단 다넣기
+    for value in scoville:
+        heapq.heappush(result,value)
 
+    while result[0] < K:
+        if len(result) < 2:
+            return -1
+
+        firstMin = heapq.heappop(result)
+        secondMin = heapq.heappop(result)
+
+        cul = firstMin + (secondMin * 2)
+        heapq.heappush(result,cul)
+        
+        count += 1
+    
+    
     return count
+
 
 
 # ========================================
