@@ -37,33 +37,28 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
-
+import math
 
 def solution(progresses, speeds):
-    arr = [];
-    x = 0;
-    count = 1;
     result = []
-    
-    for v in range(len(progresses)):
-        x = math.ceil((100 - progresses[v])/speeds[v])
-        arr.append(x)
-    
-    max_day = 0
-    max_day = arr[0]
+    days = []
+    count = 1
 
-    for i in range(1,len(arr)):
-        if arr[i] > max_day :
-            result.append(count)
-            max_day = arr[i]
-            count = 1
-            
-        else:
+    for i in range(len(progresses)):
+        days.append(math.ceil((100 - progresses[i])/speeds[i]))
+
+    standard = days[0]
+    for i in range(1,len(days)):
+        if standard >= days[i]:
             count += 1
+        else:
+            result.append(count)
+            standard = days[i]
+            count = 1
     
-    print("result?",result)
+    result.append(count)
 
-
+    return result
 
 test_cases = [
     TestCase(name="프로그래머스 예제 1", input=([93, 30, 55], [1, 30, 5]), expected=[2, 1]),
