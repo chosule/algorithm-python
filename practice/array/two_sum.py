@@ -30,7 +30,16 @@ from utils.test_helper import TestCase, run_tests  # noqa: E402
 
 
 def solution(nums, target):
-    pass  # TODO: 여기에 코드를 작성하세요
+    seen = {}
+    
+    for i,v in enumerate(nums):
+        need = target - v 
+
+        if need in seen:
+            return [seen[need],i]
+        else:
+            seen[v] = i
+
 
 
 test_cases = [
