@@ -35,18 +35,10 @@ from collections import Counter
 import math
 
 def solution(nums):
-    count = Counter(nums)
-    print("count?",count)
-    get = math.ceil(len(nums)/2)
-    print("몇마리겟할수있음?",get)
+    num = len(set(nums))
+    result = len(nums)//2
 
-    countLen = len(count.values())
-
-    print("값의 총합",sum(count.values()))
-    # if get < countLen:
-    #     return countLen -1
-    # else:
-    #     return countLen
+    return min(result,num)
 
 
 
