@@ -31,10 +31,23 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
-
+from collections import Counter
+import math
 
 def solution(nums):
-    pass  # TODO: 여기에 코드를 작성하세요
+    count = Counter(nums)
+    print("count?",count)
+    get = math.ceil(len(nums)/2)
+    print("몇마리겟할수있음?",get)
+
+    countLen = len(count.values())
+
+    print("값의 총합",sum(count.values()))
+    # if get < countLen:
+    #     return countLen -1
+    # else:
+    #     return countLen
+
 
 
 test_cases = [
