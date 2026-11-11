@@ -34,10 +34,21 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
-
+from collections import Counter
 
 def solution(participant, completion):
-    pass  # TODO: 여기에 코드를 작성하세요
+    part = Counter(participant)
+
+    for member in completion:
+        if member in part:
+            part[member] -= 1
+            # print("완주한사람 ->", part)
+    
+
+    for v,i in part.items():
+        if i == 1:
+            return v
+        
 
 
 test_cases = [
@@ -60,3 +71,4 @@ test_cases = [
 
 if __name__ == "__main__":
     run_tests(solution, test_cases)
+# solution(["a", "a", "a"], ["a", "a"])
