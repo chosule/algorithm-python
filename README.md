@@ -43,6 +43,13 @@ algorithm-python/
 
 ### 3.Hash
 
+- [x] [Contains Duplicate](problems/hash/contains_duplicate.py)
+  - [x] 학습
+  - [ ] 복습
+- [x] [Valid Anagram](problems/hash/valid_anagram.py)
+  - [x] 학습
+  - [ ] 복습
+
 ### 4.Two Pointer
 
 ### 5.Stack
@@ -59,6 +66,13 @@ algorithm-python/
   - [x] 복습
 
 ### 6.Queue
+
+- [x] [프린터](problems/queue/printer.py)
+  - [x] 학습
+  - [ ] 복습
+- [x] [다리를 지나는 트럭](problems/queue/truck_crossing_bridge.py)
+  - [x] 학습
+  - [ ] 복습
 
 ### 7.Sorting
 
