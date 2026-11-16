@@ -34,10 +34,22 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
-
+from collections import deque
 
 def solution(priorities, location):
-    pass  # TODO: 여기에 코드를 작성하세요
+    pr = deque((p, i) for i,p in enumerate(priorities))
+    order = 0
+
+    while pr :
+        prioity, idx = pr.popleft()
+
+        # 뺀거랑 있던거랑 비교하기
+        if any(prioity < p for p,_ in pr):
+            pr.append((prioity,idx))
+        else:
+            order += 1
+            if idx == location:
+                return order
 
 
 test_cases = [
