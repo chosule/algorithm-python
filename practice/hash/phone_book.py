@@ -35,7 +35,17 @@ from utils.test_helper import TestCase, run_tests  # noqa: E402
 
 
 def solution(phone_book):
-    pass  # TODO: 여기에 코드를 작성하세요
+    books = set(phone_book)
+    
+    for number in phone_book:
+        for k in range(1,len(number)):
+            find = number[:k]
+            if find in books:
+                return False
+
+    return True
+
+        
 
 
 test_cases = [
