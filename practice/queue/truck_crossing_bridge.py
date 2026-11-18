@@ -37,7 +37,25 @@ from utils.test_helper import TestCase, run_tests  # noqa: E402
 
 
 def solution(bridge_length, weight, truck_weights):
-    pass  # TODO: 여기에 코드를 작성하세요
+    bridge = deque([0] * bridge_length)
+    waiting = deque(truck_weights)
+    on_bridge = 0
+    time = 0
+
+    while waiting:
+        time += 1
+        on_bridge -= bridge.popleft()
+        if on_bridge + waiting[0] <= weight:
+            truck = waiting.popleft()
+            bridge.append(truck)
+            on_bridge += truck
+        else:
+            bridge.append(0)
+
+    return time + bridge_length
+
+        
+           
 
 
 test_cases = [
