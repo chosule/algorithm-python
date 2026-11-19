@@ -35,7 +35,18 @@ from utils.test_helper import TestCase, run_tests  # noqa: E402
 
 
 def solution(clothes):
-    pass  # TODO: 여기에 코드를 작성하세요
+    kind = {}
+    count = 1
+
+    for c in clothes:
+        [a,b] = c
+        
+        kind[b] = kind.get(b,0) + 1
+    
+    for i in kind.values():
+        count *= i + 1
+
+    return count -1 
 
 
 test_cases = [
