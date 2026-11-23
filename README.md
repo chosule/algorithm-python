@@ -49,6 +49,9 @@ algorithm-python/
 - [x] [Valid Anagram](problems/hash/valid_anagram.py)
   - [x] 학습
   - [ ] 복습
+- [x] [Group Anagrams](problems/hash/group_anagrams.py)
+  - [x] 학습
+  - [ ] 복습
 
 ### 4.Two Pointer
 
@@ -77,6 +80,10 @@ algorithm-python/
 ### 7.Sorting
 
 ### 8.Search
+
+- [x] [Find First and Last Position of Element in Sorted Array](problems/search/find_first_last_position.py)
+  - [x] 학습
+  - [ ] 복습
 
 ### 9.Greedy
 
