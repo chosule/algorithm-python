@@ -36,10 +36,33 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
+import heapq     
+from collections import deque
 
 
 def solution(operations):
-    pass  # TODO: 여기에 코드를 작성하세요
+    max = []
+    min = []
+    # queue = heapq(operations)
+
+    for v in operations:
+        arr = v.split(" ")
+        a , b = arr
+        # print("a랑 b",a,b)
+        
+        if a == "I" and int(b) < 0:
+            heapq.heappush(max,-int(b))
+            # print("I 여서 값 추가하기","추가한값 ->",b,"추가하고나서 queue ->",queue)
+        #     # queue.sort()
+        elif a == "I" and int(b) > 0:
+            heapq.heappush(min, int(b))
+
+
+    print("max",max)
+    print("min",min)
+    # if len(result) > 0:
+    #     return [heapq.heappush(result,int(b))]
+        
 
 
 test_cases = [
