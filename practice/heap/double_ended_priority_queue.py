@@ -41,7 +41,8 @@ from collections import deque
 
 
 def solution(operations):
-    result = []
+    max = []
+    min = []
     # queue = heapq(operations)
 
     for v in operations:
@@ -50,17 +51,15 @@ def solution(operations):
         # print("a랑 b",a,b)
         
         if a == "I" and int(b) < 0:
-            heapq.heappush(result,-int(b))
+            heapq.heappush(max,-int(b))
             # print("I 여서 값 추가하기","추가한값 ->",b,"추가하고나서 queue ->",queue)
         #     # queue.sort()
-        # elif a == "I" and int(b) > 0:
-        #     heapq.heappush(result,-abs(int(b)))
-
-        else:
-            heapq.heappop(result)
+        elif a == "I" and int(b) > 0:
+            heapq.heappush(min, int(b))
 
 
-    print("마지막 큐 확인",result)
+    print("max",max)
+    print("min",min)
     # if len(result) > 0:
     #     return [heapq.heappush(result,int(b))]
         
