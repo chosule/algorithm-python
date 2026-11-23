@@ -38,28 +38,42 @@ for _parent in (_here, *_here.parents):
 from utils.test_helper import TestCase, run_tests  # noqa: E402
 import heapq     
 from collections import deque
+from collections import Counter
 
 
 def solution(operations):
-    max = []
-    min = []
-    # queue = heapq(operations)
+    max_o = []
+    min_o = []
 
+    count = Counter()
+
+    while max_o and min_o and 
+    
     for v in operations:
         arr = v.split(" ")
         a , b = arr
-        # print("a랑 b",a,b)
+        print("v -->",v)
         
-        if a == "I" and int(b) < 0:
-            heapq.heappush(max,-int(b))
-            # print("I 여서 값 추가하기","추가한값 ->",b,"추가하고나서 queue ->",queue)
-        #     # queue.sort()
-        elif a == "I" and int(b) > 0:
-            heapq.heappush(min, int(b))
+        if a == "I" :
+            heapq.heappush(max_o,-int(b))
+            heapq.heappush(min_o,int(b))
+            print("max_o랑 min_o 확인하기",max_o,min_o)
+            count[int(b)] += 1
+            print("I일때 count",count)
+        elif a == "D" and max_o[0] != 0 and min_o[0] != 0 : # 음수일때 최소값 삭제
+            if int(b) < 0:
+                print("최소값 삭제하기 전의 min_o",min_o)
+                delete = heapq.heappop(min_o)
+                print("최소값 삭제하기 후의 min_o",min_o)
+            else:
+                print("최대값 삭제하기 전의 max_o",max_o)
+                delete = heapq.heappop(max_o)
+                print("최대값 삭제하기 후의 max_o",max_o)
+            
 
 
-    print("max",max)
-    print("min",min)
+    print("max",max_o)
+    print("min",min_o)
     # if len(result) > 0:
     #     return [heapq.heappush(result,int(b))]
         
