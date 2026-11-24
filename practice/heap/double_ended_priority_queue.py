@@ -42,41 +42,48 @@ from collections import Counter
 
 
 def solution(operations):
-    max_o = []
-    min_o = []
+    max_h, min_h = [], []
+    count = Counter()  # 살아 있는 값의 개수
+    size = 0           # 큐에 실제로 남은 개수
 
-    count = Counter()
+    def pop_alive(heap, sign):
+        # 이미 반대쪽 힙에서 지워진 값(개수 0)은 버리고, 살아 있는 값을 하나 꺼낸다
+        while heap:
+            v = heapq.heappop(heap) * sign
+            if count[v] > 0:
+                count[v] -= 1
+                print(f"    꺼냄 {v} → 살아있음! 개수 -1 → {dict(count)}")
+                return v
+            print(f"    꺼냄 {v} → 이미 지워진 값, 버리고 다시")
 
-    while max_o and min_o and 
-    
-    for v in operations:
-        arr = v.split(" ")
-        a , b = arr
-        print("v -->",v)
+    def peek_alive(heap, sign):
+        while count[heap[0] * sign] == 0:
+            heapq.heappop(heap)
+        return heap[0] * sign
+
+    for op in operations:
+        cmd, num = op.split()
+        num = int(num)
+        print(f"\n[{op}]")
+
+        if cmd == "I":
+            heapq.heappush(max_h, -num)
+            heapq.heappush(min_h, num)
+            count[num] += 1
+            size += 1
         
-        if a == "I" :
-            heapq.heappush(max_o,-int(b))
-            heapq.heappush(min_o,int(b))
-            print("max_o랑 min_o 확인하기",max_o,min_o)
-            count[int(b)] += 1
-            print("I일때 count",count)
-        elif a == "D" and max_o[0] != 0 and min_o[0] != 0 : # 음수일때 최소값 삭제
-            if int(b) < 0:
-                print("최소값 삭제하기 전의 min_o",min_o)
-                delete = heapq.heappop(min_o)
-                print("최소값 삭제하기 후의 min_o",min_o)
+        elif size > 0:  # 빈 큐에서 삭제는 무시
+            if num == 1:
+                pop_alive(max_h, -1)
             else:
-                print("최대값 삭제하기 전의 max_o",max_o)
-                delete = heapq.heappop(max_o)
-                print("최대값 삭제하기 후의 max_o",max_o)
-            
+                pop_alive(min_h, 1)
+            size -= 1
+        print(f"  최소힙={sorted(min_h)}  최대힙={sorted(-x for x in max_h)}  개수={dict(count)}  size={size}")
 
+    if size == 0:
+        return [0, 0]
 
-    print("max",max_o)
-    print("min",min_o)
-    # if len(result) > 0:
-    #     return [heapq.heappush(result,int(b))]
-        
+    return [peek_alive(max_h, -1), peek_alive(min_h, 1)]
 
 
 test_cases = [
