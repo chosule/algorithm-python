@@ -37,12 +37,23 @@ for _parent in (_here, *_here.parents):
         break
 
 from utils.test_helper import TestCase, run_tests  # noqa: E402
-
+import heapq
 
 def solution(nums, k):
-    pass  # TODO: 여기에 코드를 작성하세요
+    count = Counter(nums)
+    result= []
+    r =[]
+    for v, i in count.items():
+        heapq.heappush(result,(i,-v))
 
+    for i in range(len(result) - k):
+        v = heapq.heappop(result)
+    
+    for i in range(len(result)):
+        r.append(-result[i][1])
 
+    print("r",r)
+    return r[::-1]
 test_cases = [
     TestCase(name="LeetCode 예제 1", input=([1, 1, 1, 2, 2, 3], 2), expected=[1, 2]),
     TestCase(name="LeetCode 예제 2", input=([1], 1), expected=[1]),
